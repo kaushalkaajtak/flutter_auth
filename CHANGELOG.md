@@ -38,3 +38,7 @@
 - Added skip button.
 - Modififed code for terms and conditions.
 - Updated readme file.
+
+## 1.3.2
+
+- Fixed same error states not triggring
