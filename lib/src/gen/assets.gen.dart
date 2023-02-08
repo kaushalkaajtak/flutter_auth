@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
 
@@ -71,7 +71,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = false,
     bool isAntiAlias = false,
-    String? package = 'auth',
+    String? package = 'flutter_auth',
     FilterQuality filterQuality = FilterQuality.low,
     int? cacheWidth,
     int? cacheHeight,
@@ -108,5 +108,5 @@ class AssetGenImage {
 
   String get path => _assetName;
 
-  String get keyName => 'packages/auth/$_assetName';
+  String get keyName => 'packages/flutter_auth/$_assetName';
 }
