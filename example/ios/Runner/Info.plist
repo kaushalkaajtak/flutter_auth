@@ -56,16 +56,16 @@
 				<array>
 					<!-- TODO Replace this value: -->
 					<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-					<string>com.googleusercontent.apps.170163662519-2o6175rfgsti4m6ebcr9v8gfvmh2gaq0</string>
-					<string>fb443ef7d5c7891bc363e1bb26b7d708ca</string>
+					<string>com.googleusercontent.apps.170163662519-2o6175rfgsti4m6ebcr9v8gfvmh20000</string>
+					<string>fb443ef7d5c7891bc363e1bb26b7d70000</string>
 				</array>
 			</dict>
 		</array>
 
 		<key>FacebookAppID</key>
-		<string>443ef7d5c7891bc363e1bb26b7d708ca</string>
+		<string>443ef7d5c7891bc363e1bb26b7d70000</string>
 		<key>FacebookClientToken</key>
-		<string>f523d4e2f4f8bf6c1dd6acb2b74ff812</string>
+		<string>f523d4e2f4f8bf6c1dd6acb2b74f0000</string>
 		<key>FacebookDisplayName</key>
 		<string>Auth Example</string>
 	</dict>
