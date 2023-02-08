@@ -18,6 +18,7 @@ class VerifyOtp extends OtpReceiverState {}
 
 class ReceiverError extends OtpReceiverState {
   final String messae;
+  final DateTime daterTime;
 
-  ReceiverError(this.messae);
+  ReceiverError(this.messae, this.daterTime);
 }

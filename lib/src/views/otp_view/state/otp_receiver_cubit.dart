@@ -21,9 +21,9 @@ class OtpReceiverCubit extends Cubit<OtpReceiverState> {
 
       emit(OtpVerified(userModel));
     } on AuthException catch (e) {
-      emit(ReceiverError(e.message));
+      emit(ReceiverError(e.message, DateTime.now()));
     } catch (e) {
-      emit(ReceiverError(e.toString()));
+      emit(ReceiverError(e.toString(), DateTime.now()));
     }
   }
 
@@ -34,9 +34,9 @@ class OtpReceiverCubit extends Cubit<OtpReceiverState> {
         emit(ResentOtp());
       }
     } on AuthException catch (e) {
-      emit(ReceiverError(e.message));
+      emit(ReceiverError(e.message, DateTime.now()));
     } catch (e) {
-      emit(ReceiverError(e.toString()));
+      emit(ReceiverError(e.toString(), DateTime.now()));
     }
   }
 }
