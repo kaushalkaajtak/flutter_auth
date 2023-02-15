@@ -51,3 +51,7 @@
 
 - Fixed iOS login type issue.
 - Modified error message in repository.
+
+## 1.3.5
+
+- Android method channel issue fixed.
