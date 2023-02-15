@@ -39,6 +39,10 @@
 - Modififed code for terms and conditions.
 - Updated readme file.
 
-## 1.3.1
+## 1.3.2
+
+- Fixed same error states not triggring
+
+## 1.3.3
 
 - Fixed symlink issue iOS.

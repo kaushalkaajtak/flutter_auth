@@ -1,6 +1,6 @@
 name: flutter_auth
 description: A new Flutter plugin project.
-version: 1.3.1
+version: 1.3.3
 homepage: https://github.com/kaushalkaajtak/flutter_auth
 
 environment:
