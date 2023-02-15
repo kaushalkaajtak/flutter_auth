@@ -1,4 +1,3 @@
- 
 import 'package:dio/dio.dart';
 import '../consts/apis/api_consts.dart';
 import '../models/login_request.dart';
@@ -22,7 +21,7 @@ class AuthRepo {
       var responseMap = response.data as Map<String, dynamic>;
       return LoginResponse.fromJson(responseMap);
     } on DioError catch (e) {
-      throw AuthException(message: e.message);
+      throw AuthException(message: e.response?.data['message'] ?? e.message);
     } on FormatException catch (e) {
       throw AuthException(message: e.message);
     }
@@ -37,7 +36,7 @@ class AuthRepo {
       var responseMap = response.data as Map<String, dynamic>;
       return LoginResponse.fromJson(responseMap);
     } on DioError catch (e) {
-      throw AuthException(message: e.message);
+      throw AuthException(message: e.response?.data['message'] ?? e.message);
     } on FormatException catch (e) {
       throw AuthException(message: e.message);
     }
@@ -53,7 +52,7 @@ class AuthRepo {
       var responseMap = response.data as Map<String, dynamic>;
       return LoginResponse.fromJson(responseMap);
     } on DioError catch (e) {
-      throw AuthException(message: e.message);
+      throw AuthException(message: e.response?.data['message'] ?? e.message);
     } on FormatException catch (e) {
       throw AuthException(message: e.message);
     }

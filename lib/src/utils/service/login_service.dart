@@ -66,7 +66,7 @@ class LoginService {
           var response = await _authRepo.serverAuthentication(
             request: LoginRequest(
               email: userData['email'] ?? '',
-              loginType: LoginRequest.googleType,
+              loginType: LoginRequest.facebookType,
               fullname: userData['name'] ?? '',
               facebookId: userData['id'] ?? '',
               profileImage: userData['picture']?['data']?['url'] ?? '',

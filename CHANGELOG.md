@@ -46,3 +46,8 @@
 ## 1.3.3
 
 - Fixed symlink issue iOS.
+
+## 1.3.4
+
+- Fixed iOS login type issue.
+- Modified error message in repository.
