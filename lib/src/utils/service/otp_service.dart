@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/services.dart';
 
 abstract class OtpService {
-  static const MethodChannel _methodChannel = MethodChannel('auth');
+  static const MethodChannel _methodChannel = MethodChannel('flutter_auth');
   static Future<void> getPhoneNumberHint() async {
     try {
       await _methodChannel.invokeMethod('requestPhoneNumber');

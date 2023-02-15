@@ -55,3 +55,7 @@
 ## 1.3.5
 
 - Android method channel issue fixed.
+
+## 1.3.6
+
+- Updated flutter channel.
