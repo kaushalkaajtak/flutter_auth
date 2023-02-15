@@ -9,6 +9,6 @@ public class FlutterAuthPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
+    result("iOS app " + UIDevice.current.systemVersion)
   }
 }
