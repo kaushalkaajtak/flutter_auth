@@ -16,15 +16,15 @@ class OtpReceiverCubit extends Cubit<OtpReceiverState> {
   ) : super(ReceiverInitial());
 
   Future<void> verifyOtp(String userId, String otp) async {
-    emit(ReceiverLoading());
+    emit(ReceiverLoading(DateTime.now()));
     try {
       var userModel = await service.verifyOtp(OtpRequest(id: userId, otp: otp));
 
-      emit(OtpVerified(userModel));
+      emit(OtpVerified(userModel, DateTime.now()));
     } on AuthException catch (e) {
-      emit(ReceiverError(e.message));
+      emit(ReceiverError(e.message,DateTime.now()));
     } catch (e) {
-      emit(ReceiverError(e.toString()));
+      emit(ReceiverError(e.toString(),DateTime.now()));
     }
   }
 
@@ -32,12 +32,12 @@ class OtpReceiverCubit extends Cubit<OtpReceiverState> {
     try {
       var result = await service.resendOtp(ResendOtpRequest(id: userId));
       if (result) {
-        emit(ResentOtp());
+        emit(ResentOtp(DateTime.now()));
       }
     } on AuthException catch (e) {
-      emit(ReceiverError(e.message));
+      emit(ReceiverError(e.message,DateTime.now()));
     } catch (e) {
-      emit(ReceiverError(e.toString()));
+      emit(ReceiverError(e.toString(),DateTime.now()));
     }
   }
 }

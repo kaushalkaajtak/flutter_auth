@@ -59,3 +59,8 @@
 ## 1.3.6
 
 - Updated flutter channel.
+
+
+## 1.3.7
+
+- Added equatable for remaining events.

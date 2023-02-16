@@ -15,19 +15,19 @@ class OtpCubit extends Cubit<OtpState> {
     // setting up null if user tries to login again
     // then the sucess might get calls even if current request has failed.
     userModel = null;
-    emit(OtpLoading());
+    emit(OtpLoading(DateTime.now()));
 
     try {
       userModel = await service.phoneAuth(phoneNumber);
       if (userModel == null) {
-        emit(OtpError('Some error occured.'));
+        emit(OtpError('Some error occured.', DateTime.now()));
       } else {
-        emit(OtpSent());
+        emit(OtpSent(DateTime.now()));
       }
     } on AuthException catch (e) {
-      emit(OtpError(e.message));
+      emit(OtpError(e.message, DateTime.now()));
     } catch (e) {
-      emit(OtpError(e.toString()));
+      emit(OtpError(e.toString(), DateTime.now()));
     }
   }
 }
