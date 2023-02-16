@@ -64,3 +64,7 @@
 ## 1.3.7
 
 - Added equatable for remaining events.
+
+## 1.3.8
+
+- Made dependencies factory in locator to fix otp verify button not working when relogin.

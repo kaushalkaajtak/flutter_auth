@@ -29,13 +29,13 @@ class Locator {
   void registerLocators(
       {List<String>? googleScopes, String? fbScopes, required String baseUrl}) {
     if (!_getIt.isRegistered<AuthCubit>()) {
-      _getIt.registerLazySingleton<AuthCubit>(
+      _getIt.registerFactory<AuthCubit>(
         () => AuthCubit(_getIt.get<LoginService>()),
       );
-      _getIt.registerLazySingleton<OtpReceiverCubit>(
+      _getIt.registerFactory<OtpReceiverCubit>(
         () => OtpReceiverCubit(_getIt.get<LoginService>()),
       );
-      _getIt.registerLazySingleton<OtpCubit>(
+      _getIt.registerFactory<OtpCubit>(
         () => OtpCubit(service: _getIt.get<LoginService>()),
       );
       _getIt.registerLazySingleton<LoginService>(
