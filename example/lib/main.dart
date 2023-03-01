@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter_auth/flutter_auth.dart';
- 
 
 void main() {
   runApp(const MaterialApp(home: MyApp()));
@@ -46,10 +45,9 @@ class _MyAppState extends State<MyApp> {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(message)));
                       },
-                      footerWidget: Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.only(top: 30),
-                        child: const Text("Terms and Conditions"),
+                      footerWidget: const Padding(
+                        padding: EdgeInsets.only(bottom: 10.0),
+                        child: Text("Terms and Conditions"),
                       ),
                       googleScopes: const [
                         'email',

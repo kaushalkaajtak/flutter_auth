@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'dart:ui';
- 
+
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_auth/src/consts/auth_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../consts/strings.dart';
 import '../../../gen/assets.gen.dart';
@@ -68,6 +71,7 @@ class _AuthViewState extends State<AuthView> {
   String countryCode = '+91';
   String phoneNumber = '';
   bool isvalidated = false;
+  bool clickedOnce = false;
 
   final _phoneController = TextEditingController();
   @override
@@ -75,6 +79,7 @@ class _AuthViewState extends State<AuthView> {
     OtpService.otpListener((data) {
       if (data.keys.contains('number')) {
         if (data['number'] != null) {
+          countryCode = data['number'].toString().substring(0, 3);
           _phoneController.text = data['number'].toString().substring(3);
           phoneNumber = _phoneController.text;
           _mobileChangedListener(phoneNumber);
@@ -158,160 +163,251 @@ class _AuthViewState extends State<AuthView> {
               }
             }
           },
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            padding: EdgeInsets.zero,
+          child: Column(
             children: [
-              TitleWidget(
-                  headerWidget: widget.headerWidget,
-                  description:
-                      'Join us to access all the best\nfeatures that enhance your essential daily\n crime news',
-                  title: 'Login or Register'),
-              Column(
-                children: [
-                  if (widget.enableOtpAuth)
+              Expanded(
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  children: [
+                    TitleWidget(
+                        headerWidget: widget.headerWidget,
+                        description:
+                            'Join us to access all the best\nfeatures that enhance your essential daily\n crime news',
+                        title: 'Login or Register'),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black12),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: TextField(
-                            decoration: const InputDecoration(
-                                hintText: 'Mobile Number',
-                                hintStyle: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey),
-                                contentPadding: EdgeInsets.zero,
-                                border: InputBorder.none,
-                                constraints: BoxConstraints(
-                                    maxWidth: 267, maxHeight: 45)),
-                            controller: _phoneController,
-                            onChanged: (value) {
-                              phoneNumber = _phoneController.text;
-                              _mobileChangedListener(phoneNumber);
-                            },
-                            onTap: () {
-                              if (Platform.isAndroid) {
-                                if (_phoneController.text.isEmpty) {
-                                  OtpService.getPhoneNumberHint();
-                                }
-                              }
-                            },
-                          ),
-                        ),
-                        if (_mobileError != null && _mobileError!.isNotEmpty)
+                        if (widget.enableOtpAuth)
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(height: 5),
-                              Text(_mobileError!,
-                                  style: const TextStyle(
-                                      color: Colors.red, fontSize: 12)),
+                              GestureDetector(
+                                onTap: () {
+                                  showCountryPicker(
+                                    context: context,
+                                    favorite: ['IN', 'US'],
+                                    showPhoneCode:
+                                        true, // optional. Shows phone code before the country name.
+                                    onSelect: (Country country) {
+                                      countryCode = '+${country.phoneCode}';
+                                      setState(() {});
+                                    },
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      height: 45,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AuthColors
+                                                .textFieldBorderColor),
+                                        color: AuthColors.countryCodePicker,
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          bottomLeft: Radius.circular(10),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            countryCode,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              color: AuthColors.white,
+                                            ),
+                                          ),
+                                          const Icon(
+                                            Icons.keyboard_arrow_down,
+                                            size: 16,
+                                            color: AuthColors.white,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AuthColors
+                                                .textFieldBorderColor),
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                        ),
+                                      ),
+                                      child: TextField(
+                                        keyboardType: TextInputType.phone,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
+                                        maxLength: 15,
+                                        decoration: const InputDecoration(
+                                          hintText: 'Mobile Number',
+                                          hintStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey,
+                                          ),
+                                          contentPadding: EdgeInsets.zero,
+                                          border: InputBorder.none,
+                                          constraints: BoxConstraints(
+                                            maxWidth: 197,
+                                            maxHeight: 45,
+                                          ),
+                                        ),
+                                        controller: _phoneController,
+                                        buildCounter: (context,
+                                            {required currentLength,
+                                            required isFocused,
+                                            maxLength}) {
+                                          return SizedBox();
+                                        },
+                                        onChanged: (value) {
+                                          if (_phoneController.text.length <
+                                              16) {
+                                            phoneNumber = _phoneController.text;
+                                            _mobileChangedListener(phoneNumber);
+                                          }
+                                        },
+                                        onTap: () {
+                                          if (Platform.isAndroid &&
+                                              !clickedOnce) {
+                                            if (_phoneController.text.isEmpty) {
+                                              OtpService.getPhoneNumberHint();
+                                            }
+                                            setState(() {
+                                              clickedOnce = true;
+                                            });
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              if (_mobileError != null &&
+                                  _mobileError!.isNotEmpty)
+                                Column(
+                                  children: [
+                                    const SizedBox(height: 5),
+                                    Text(_mobileError!,
+                                        style: const TextStyle(
+                                            color: Colors.red, fontSize: 12)),
+                                  ],
+                                ),
+                              const SizedBox(height: 32),
+                              RegularButton(
+                                isActive: isvalidated,
+                                ontap: () {
+                                  context
+                                      .read<OtpCubit>()
+                                      .requestOtp(phoneNumber);
+                                },
+                                name: 'Verify OTP to Proceed',
+                              ),
+                              const SizedBox(height: 24),
+                              SizedBox(
+                                width: 307,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        height: 0.5,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      'OR',
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Container(
+                                        height: 0.5,
+                                        color: Colors.grey,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 12),
                             ],
                           ),
-                        const SizedBox(height: 32),
-                        RegularButton(
-                          isActive: isvalidated,
-                          ontap: () {
-                            context.read<OtpCubit>().requestOtp(phoneNumber);
+                        AuthButton(
+                          margin: const EdgeInsets.only(top: 5),
+                          isVisible: widget.enableFacebookAuth,
+                          image: Assets.icons.facebook,
+                          buttonText: Strings.facebook,
+                          ontap: () async {
+                            await cubit.facebookLogin();
+
+                            // saving user model in a variable for better null check syntax
+                            var userModel = cubit.userModel;
+                            var successCallback = widget.onloginSuccess;
+
+                            // checks if success call is provided and given that user has successfull
+                            // logged in it invoks the callback with user model.
+                            if (userModel != null) {
+                              successCallback(userModel);
+                            }
                           },
-                          name: 'Verify OTP to Proceed',
                         ),
-                        const SizedBox(height: 24),
-                        SizedBox(
-                          width: 307,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  height: 0.5,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              const Text(
-                                'OR',
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: Container(
-                                  height: 0.5,
-                                  color: Colors.grey,
-                                ),
-                              )
-                            ],
-                          ),
+                        AuthButton(
+                          isVisible: widget.enableGoogleAuth,
+                          margin: const EdgeInsets.only(top: 5),
+                          image: Assets.icons.google,
+                          buttonText: Strings.google,
+                          ontap: () async {
+                            await cubit.googleLogin();
+
+                            // saving user model in a variable for better null check syntax
+                            var userModel = cubit.userModel;
+                            var successCallback = widget.onloginSuccess;
+
+                            // checks if success call is provided and given that user has successfull
+                            // logged in it invoks the callback with user model.
+
+                            if (userModel != null) {
+                              successCallback(userModel);
+                            }
+                          },
                         ),
-                        const SizedBox(height: 12),
+                        AuthButton(
+                          margin: const EdgeInsets.only(top: 5),
+                          isVisible: Platform.isIOS && widget.enableAppleAuth,
+                          image: Assets.icons.apple,
+                          buttonText: Strings.apple,
+                          ontap: () async {
+                            await cubit.appleLogin();
+
+                            // saving user model in a variable for better null check syntax
+                            var userModel = cubit.userModel;
+                            var successCallback = widget.onloginSuccess;
+
+                            // checks if success call is provided and given that user has successfull
+                            // logged in it invoks the callback with user model.
+                            if (userModel != null) {
+                              successCallback(userModel);
+                            }
+                          },
+                        ),
                       ],
                     ),
-                  AuthButton(
-                    margin: const EdgeInsets.only(top: 5),
-                    isVisible: widget.enableFacebookAuth,
-                    image: Assets.icons.facebook,
-                    buttonText: Strings.facebook,
-                    ontap: () async {
-                      await cubit.facebookLogin();
-
-                      // saving user model in a variable for better null check syntax
-                      var userModel = cubit.userModel;
-                      var successCallback = widget.onloginSuccess;
-
-                      // checks if success call is provided and given that user has successfull
-                      // logged in it invoks the callback with user model.
-                      if (userModel != null) {
-                        successCallback(userModel);
-                      }
-                    },
-                  ),
-                  AuthButton(
-                    isVisible: widget.enableGoogleAuth,
-                    margin: const EdgeInsets.only(top: 5),
-                    image: Assets.icons.google,
-                    buttonText: Strings.google,
-                    ontap: () async {
-                      await cubit.googleLogin();
-
-                      // saving user model in a variable for better null check syntax
-                      var userModel = cubit.userModel;
-                      var successCallback = widget.onloginSuccess;
-
-                      // checks if success call is provided and given that user has successfull
-                      // logged in it invoks the callback with user model.
-
-                      if (userModel != null) {
-                        successCallback(userModel);
-                      }
-                    },
-                  ),
-                  AuthButton(
-                    margin: const EdgeInsets.only(top: 5),
-                    isVisible: Platform.isIOS && widget.enableAppleAuth,
-                    image: Assets.icons.apple,
-                    buttonText: Strings.apple,
-                    ontap: () async {
-                      await cubit.appleLogin();
-
-                      // saving user model in a variable for better null check syntax
-                      var userModel = cubit.userModel;
-                      var successCallback = widget.onloginSuccess;
-
-                      // checks if success call is provided and given that user has successfull
-                      // logged in it invoks the callback with user model.
-                      if (userModel != null) {
-                        successCallback(userModel);
-                      }
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
               widget.footerWidget ?? Container()
             ],
@@ -333,16 +429,19 @@ class _AuthViewState extends State<AuthView> {
   }
 
   String? validatePhone(String value) {
-    Pattern pattern = r'^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$';
+    // Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
 
-    RegExp regex = RegExp(pattern as String);
+    // RegExp regex = RegExp(pattern as String);
 
     if (value.trim().isEmpty) {
       return 'Please enter your mobile number';
       // return "Empty phone number";
-    } else if (!regex.hasMatch(value)) {
-      return 'Please enter a valid mobile number';
-    } else {
+    }
+
+    // else if (!regex.hasMatch(value)) {
+    //   return 'Please enter a valid mobile number';
+    // }
+    else {
       return null;
     }
   }

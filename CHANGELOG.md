@@ -68,3 +68,8 @@
 ## 1.3.8
 
 - Made dependencies factory in locator to fix otp verify button not working when relogin.
+
+## 1.4.0
+
+- Added county code picker
+- Modified code for bottom bar to let the widget stick to bottom.
