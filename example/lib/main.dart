@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
                       isSkipVisible: true,
                       onSkip: () {},
                       skipText: 'Skip',
-                      baseUrl: 'https://api-lallantop-dev.mobiletak.com/',
+                      baseUrl: 'https://api-crimetak-dev.mobiletak.com/',
                       onfailure: (message) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(message)));

@@ -1,6 +1,5 @@
 import 'dart:io';
 
- 
 import 'package:device_info_plus/device_info_plus.dart';
 
 import '../consts/strings.dart';
@@ -11,7 +10,11 @@ class LoginRequest {
   /// [googleType], [appleType], [facebookType], [otpType]
   final String loginType;
 
+  /// phone auth values
   final String phoneNumber;
+  final String countryCode;
+  final String e164Key;
+
   final String email;
 
   /// social id for facebook
@@ -35,17 +38,20 @@ class LoginRequest {
   /// device Id for specific platform and device
   final String? deviceId;
 
-  LoginRequest(
-      {required this.loginType,
-      this.phoneNumber = '',
-      this.facebookId = '',
-      this.googleId = '',
-      this.appleId = '',
-      this.fullname,
-      this.profileImage,
-      this.cleverTapId,
-      this.deviceId,
-      this.email = ''}) {
+  LoginRequest({
+    required this.loginType,
+    this.phoneNumber = '',
+    this.facebookId = '',
+    this.googleId = '',
+    this.appleId = '',
+    this.fullname,
+    this.profileImage,
+    this.cleverTapId,
+    this.deviceId,
+    this.email = '',
+    this.countryCode = '',
+    this.e164Key = '',
+  }) {
     deviceType = Platform.isAndroid ? Strings.android : Strings.ios;
   }
 
@@ -62,6 +68,8 @@ class LoginRequest {
     data['deviceId'] = deviceId;
     data['cleverTapId'] = cleverTapId;
     data['email'] = email;
+    data['countyCode'] = countryCode;
+    data['e164Key'] = e164Key;
     return data;
   }
 

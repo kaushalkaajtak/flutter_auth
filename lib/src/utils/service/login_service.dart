@@ -1,4 +1,3 @@
- 
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -142,13 +141,18 @@ class LoginService {
     }
   }
 
-  Future<UserModel?> phoneAuth(String phoneNumber) async {
+  Future<UserModel?> phoneAuth(
+      {required String phoneNumber,
+      required String countyCode,
+      required String e164Key}) async {
     // otp requesting
 
     try {
       var response = await _authRepo.serverAuthentication(
           request: LoginRequest(
         phoneNumber: phoneNumber,
+        countryCode: countyCode,
+        e164Key: e164Key,
         deviceId: await LoginRequest.deviceIdentifier(),
         loginType: LoginRequest.otpType,
       ));

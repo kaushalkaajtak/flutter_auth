@@ -73,3 +73,8 @@
 
 - Added county code picker
 - Modified code for bottom bar to let the widget stick to bottom.
+
+## 1.4.1
+
+- Added parameters for phone login [e164Key,countryCode]
+- Modified dev api for example app.

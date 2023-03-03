@@ -69,6 +69,7 @@ class AuthView extends StatefulWidget {
 class _AuthViewState extends State<AuthView> {
   String? _mobileError;
   String countryCode = '+91';
+  String e164Key = '91-IN-0';
   String phoneNumber = '';
   bool isvalidated = false;
   bool clickedOnce = false;
@@ -190,6 +191,7 @@ class _AuthViewState extends State<AuthView> {
                                         true, // optional. Shows phone code before the country name.
                                     onSelect: (Country country) {
                                       countryCode = '+${country.phoneCode}';
+                                      e164Key = country.e164Key;
                                       setState(() {});
                                     },
                                   );
@@ -248,7 +250,7 @@ class _AuthViewState extends State<AuthView> {
                                         inputFormatters: [
                                           FilteringTextInputFormatter.digitsOnly
                                         ],
-                                        maxLength: 15,
+                                        maxLength: 12,
                                         decoration: const InputDecoration(
                                           hintText: 'Mobile Number',
                                           hintStyle: TextStyle(
@@ -271,11 +273,8 @@ class _AuthViewState extends State<AuthView> {
                                           return SizedBox();
                                         },
                                         onChanged: (value) {
-                                          if (_phoneController.text.length <
-                                              16) {
-                                            phoneNumber = _phoneController.text;
-                                            _mobileChangedListener(phoneNumber);
-                                          }
+                                          phoneNumber = _phoneController.text;
+                                          _mobileChangedListener(phoneNumber);
                                         },
                                         onTap: () {
                                           if (Platform.isAndroid &&
@@ -307,9 +306,10 @@ class _AuthViewState extends State<AuthView> {
                               RegularButton(
                                 isActive: isvalidated,
                                 ontap: () {
-                                  context
-                                      .read<OtpCubit>()
-                                      .requestOtp(phoneNumber);
+                                  context.read<OtpCubit>().requestOtp(
+                                      countyCode: countryCode,
+                                      e164Key: e164Key,
+                                      phoneNumber: phoneNumber);
                                 },
                                 name: 'Verify OTP to Proceed',
                               ),
