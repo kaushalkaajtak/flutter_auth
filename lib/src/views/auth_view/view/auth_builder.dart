@@ -10,7 +10,8 @@ import 'auth_view.dart';
 class AuthBuilder extends StatelessWidget {
   /// base url for server api
   final String baseUrl;
-
+  final String? screen1Description;
+  final String? screen1Title;
   final bool isPhoneVerifyFlow;
 
   /// defaults to email scope only
@@ -63,6 +64,8 @@ class AuthBuilder extends StatelessWidget {
     required this.skipText,
     required this.onSkip,
     this.isPhoneVerifyFlow = false,
+    this.screen1Description,
+    this.screen1Title,
   }) {
     // registering dependencies
     Locator.i.registerLocators(
@@ -84,6 +87,8 @@ class AuthBuilder extends StatelessWidget {
         )
       ],
       child: AuthView(
+        screen1Description: screen1Description,
+        screen1Title: screen1Title,
         isPhoneVerifyFlow: isPhoneVerifyFlow,
         headerWidget: headerWidget,
         footerWidget: footerWidget,
