@@ -16,9 +16,11 @@ class AuthRepo {
       var response = await _dio.post(
         ApiConsts.LOGIN,
         data: request.toJson(),
-        options: Options(
-          headers: {"Authorization": "Bearer $token"},
-        ),
+        options: token != null
+            ? Options(
+                headers: {"Authorization": "Bearer $token"},
+              )
+            : null,
       );
       var responseMap = response.data as Map<String, dynamic>;
       return LoginResponse.fromJson(responseMap);
