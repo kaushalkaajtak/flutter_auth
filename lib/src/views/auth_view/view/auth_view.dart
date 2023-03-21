@@ -26,6 +26,9 @@ class AuthView extends StatefulWidget {
   /// widget to be used as a footer if provided defaults to empty Container
   final Widget? footerWidget;
 
+  /// Auth token - If want to verify phoneNumber only.
+  final String? authToken;
+
   final bool isPhoneVerifyFlow;
   final String? screen1Description;
   final String? screen1Title;
@@ -67,6 +70,7 @@ class AuthView extends StatefulWidget {
     this.isPhoneVerifyFlow = false,
     this.screen1Description,
     this.screen1Title,
+    this.authToken,
   });
 
   @override
@@ -315,6 +319,8 @@ class _AuthViewState extends State<AuthView> {
                                 isActive: isvalidated,
                                 ontap: () {
                                   context.read<OtpCubit>().requestOtp(
+                                        /// Auth token - If want to verify phoneNumber only.
+                                        authToken: widget.authToken,
                                         countyCode: countryCode,
                                         e164Key: e164Key,
                                         phoneNumber: phoneNumber,

@@ -145,19 +145,21 @@ class LoginService {
       {required String phoneNumber,
       required String countyCode,
       required String e164Key,
-      required bool numberUpdate}) async {
+      required bool numberUpdate,
+      String? authToken}) async {
     // otp requesting
 
     try {
       var response = await _authRepo.serverAuthentication(
           request: LoginRequest(
-        phoneNumber: phoneNumber,
-        countryCode: countyCode,
-        e164Key: e164Key,
-        numberUpdate: numberUpdate,
-        deviceId: await LoginRequest.deviceIdentifier(),
-        loginType: LoginRequest.otpType,
-      ));
+            phoneNumber: phoneNumber,
+            countryCode: countyCode,
+            e164Key: e164Key,
+            numberUpdate: numberUpdate,
+            deviceId: await LoginRequest.deviceIdentifier(),
+            loginType: LoginRequest.otpType,
+          ),
+          token: authToken);
 
       if (response.status ?? false) {
         return response.result;

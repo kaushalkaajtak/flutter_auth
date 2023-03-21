@@ -11,11 +11,14 @@ class AuthRepo {
   AuthRepo(this._dio);
 
   Future<LoginResponse> serverAuthentication(
-      {required LoginRequest request}) async {
+      {required LoginRequest request, String? token}) async {
     try {
       var response = await _dio.post(
         ApiConsts.LOGIN,
         data: request.toJson(),
+        options: Options(
+          headers: {"Bearer": token},
+        ),
       );
 
       var responseMap = response.data as Map<String, dynamic>;
