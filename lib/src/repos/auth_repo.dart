@@ -17,10 +17,9 @@ class AuthRepo {
         ApiConsts.LOGIN,
         data: request.toJson(),
         options: Options(
-          headers: {"Bearer": token},
+          headers: {"Authorization": "Bearer $token"},
         ),
       );
-
       var responseMap = response.data as Map<String, dynamic>;
       return LoginResponse.fromJson(responseMap);
     } on DioError catch (e) {
