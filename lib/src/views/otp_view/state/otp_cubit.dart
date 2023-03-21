@@ -11,14 +11,22 @@ class OtpCubit extends Cubit<OtpState> {
 
   UserModel? userModel;
 
-  Future<void> requestOtp({required String phoneNumber,required String countyCode, required String e164Key }) async {
+  Future<void> requestOtp(
+      {required String phoneNumber,
+      required String countyCode,
+      required String e164Key,
+      required bool numberUpdate}) async {
     // setting up null if user tries to login again
     // then the sucess might get calls even if current request has failed.
     userModel = null;
     emit(OtpLoading(DateTime.now()));
 
     try {
-      userModel = await service.phoneAuth(phoneNumber: phoneNumber, countyCode: countyCode, e164Key: e164Key);
+      userModel = await service.phoneAuth(
+          phoneNumber: phoneNumber,
+          countyCode: countyCode,
+          e164Key: e164Key,
+          numberUpdate: numberUpdate);
       if (userModel == null) {
         emit(OtpError('Some error occured.', DateTime.now()));
       } else {

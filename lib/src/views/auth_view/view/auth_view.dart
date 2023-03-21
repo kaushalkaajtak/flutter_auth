@@ -26,6 +26,10 @@ class AuthView extends StatefulWidget {
   /// widget to be used as a footer if provided defaults to empty Container
   final Widget? footerWidget;
 
+  final bool isPhoneVerifyFlow;
+  final String? screen1Description;
+  final String? screen1Title;
+
   final bool enableGoogleAuth;
   final bool enableFacebookAuth;
   final bool enableOtpAuth;
@@ -60,6 +64,9 @@ class AuthView extends StatefulWidget {
     required this.isSkipVisible,
     required this.onSkip,
     required this.skipText,
+    this.isPhoneVerifyFlow = false,
+    this.screen1Description,
+    this.screen1Title,
   });
 
   @override
@@ -172,10 +179,11 @@ class _AuthViewState extends State<AuthView> {
                   padding: EdgeInsets.zero,
                   children: [
                     TitleWidget(
-                        headerWidget: widget.headerWidget,
-                        description:
-                            'Join us to access all the best\nfeatures that enhance your essential daily\n crime news',
-                        title: 'Login or Register'),
+                      headerWidget: widget.headerWidget,
+                      description: widget.screen1Description ??
+                          'Join us to access all the best\nfeatures that enhance your essential daily\n crime news',
+                      title: widget.screen1Title ?? 'Login or Register',
+                    ),
                     Column(
                       children: [
                         if (widget.enableOtpAuth)
@@ -307,9 +315,11 @@ class _AuthViewState extends State<AuthView> {
                                 isActive: isvalidated,
                                 ontap: () {
                                   context.read<OtpCubit>().requestOtp(
-                                      countyCode: countryCode,
-                                      e164Key: e164Key,
-                                      phoneNumber: phoneNumber);
+                                        countyCode: countryCode,
+                                        e164Key: e164Key,
+                                        phoneNumber: phoneNumber,
+                                        numberUpdate: widget.isPhoneVerifyFlow,
+                                      );
                                 },
                                 name: 'Verify OTP to Proceed',
                               ),

@@ -14,6 +14,7 @@ class LoginRequest {
   final String phoneNumber;
   final String countryCode;
   final String e164Key;
+  final bool numberUpdate;
 
   final String email;
 
@@ -51,6 +52,7 @@ class LoginRequest {
     this.email = '',
     this.countryCode = '',
     this.e164Key = '',
+    this.numberUpdate = false,
   }) {
     deviceType = Platform.isAndroid ? Strings.android : Strings.ios;
   }
@@ -70,6 +72,7 @@ class LoginRequest {
     data['email'] = email;
     data['countyCode'] = countryCode;
     data['e164Key'] = e164Key;
+    data['numberUpdate'] = numberUpdate;
     return data;
   }
 

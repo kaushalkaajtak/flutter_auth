@@ -144,7 +144,8 @@ class LoginService {
   Future<UserModel?> phoneAuth(
       {required String phoneNumber,
       required String countyCode,
-      required String e164Key}) async {
+      required String e164Key,
+      required bool numberUpdate}) async {
     // otp requesting
 
     try {
@@ -153,6 +154,7 @@ class LoginService {
         phoneNumber: phoneNumber,
         countryCode: countyCode,
         e164Key: e164Key,
+        numberUpdate: numberUpdate,
         deviceId: await LoginRequest.deviceIdentifier(),
         loginType: LoginRequest.otpType,
       ));
