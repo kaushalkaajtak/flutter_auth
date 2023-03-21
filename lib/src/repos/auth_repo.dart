@@ -9,6 +9,7 @@ import '../utils/auth_exception/auth_exception.dart';
 class AuthRepo {
   final Dio _dio;
   AuthRepo(this._dio);
+//Chlja noobde
 
   Future<LoginResponse> serverAuthentication(
       {required LoginRequest request, String? token}) async {
