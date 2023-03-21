@@ -12,6 +12,9 @@ class AuthBuilder extends StatelessWidget {
   final String baseUrl;
   final String? screen1Description;
   final String? screen1Title;
+
+  /// Auth token - If want to verify phoneNumber only.
+  final String? authToken;
   final bool isPhoneVerifyFlow;
 
   /// defaults to email scope only
@@ -66,6 +69,7 @@ class AuthBuilder extends StatelessWidget {
     this.isPhoneVerifyFlow = false,
     this.screen1Description,
     this.screen1Title,
+    this.authToken,
   }) {
     // registering dependencies
     Locator.i.registerLocators(
