@@ -324,35 +324,38 @@ class _AuthViewState extends State<AuthView> {
                                 name: 'Verify OTP to Proceed',
                               ),
                               const SizedBox(height: 24),
-                              SizedBox(
-                                width: 307,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        height: 0.5,
-                                        color: Colors.grey,
+                              widget.isPhoneVerifyFlow
+                                  ? SizedBox()
+                                  : SizedBox(
+                                      width: 307,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              height: 0.5,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          const Text(
+                                            'OR',
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Expanded(
+                                            child: Container(
+                                              height: 0.5,
+                                              color: Colors.grey,
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     ),
-                                    const SizedBox(width: 10),
-                                    const Text(
-                                      'OR',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Container(
-                                        height: 0.5,
-                                        color: Colors.grey,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
                               const SizedBox(height: 12),
                             ],
                           ),
