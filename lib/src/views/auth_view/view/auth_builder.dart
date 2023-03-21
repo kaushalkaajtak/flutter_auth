@@ -91,6 +91,7 @@ class AuthBuilder extends StatelessWidget {
         )
       ],
       child: AuthView(
+        authToken: authToken,
         screen1Description: screen1Description,
         screen1Title: screen1Title,
         isPhoneVerifyFlow: isPhoneVerifyFlow,
