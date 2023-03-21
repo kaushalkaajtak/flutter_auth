@@ -1,4 +1,3 @@
- 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +10,8 @@ import 'auth_view.dart';
 class AuthBuilder extends StatelessWidget {
   /// base url for server api
   final String baseUrl;
+
+  final bool isPhoneVerifyFlow;
 
   /// defaults to email scope only
   final List<String>? googleScopes;
@@ -61,6 +62,7 @@ class AuthBuilder extends StatelessWidget {
     required this.isSkipVisible,
     required this.skipText,
     required this.onSkip,
+    this.isPhoneVerifyFlow = false,
   }) {
     // registering dependencies
     Locator.i.registerLocators(
@@ -82,6 +84,7 @@ class AuthBuilder extends StatelessWidget {
         )
       ],
       child: AuthView(
+        isPhoneVerifyFlow: isPhoneVerifyFlow,
         headerWidget: headerWidget,
         footerWidget: footerWidget,
         enableOtpAuth: enableOtpAuth,
