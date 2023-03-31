@@ -36,6 +36,7 @@ class AuthView extends StatefulWidget {
   final bool enableGoogleAuth;
   final bool enableFacebookAuth;
   final bool enableOtpAuth;
+  final bool showBottomLine;
 
   /// available for ios only
   final bool enableAppleAuth;
@@ -71,6 +72,7 @@ class AuthView extends StatefulWidget {
     this.screen1Description,
     this.screen1Title,
     this.authToken,
+    required this.showBottomLine,
   });
 
   @override
@@ -330,7 +332,7 @@ class _AuthViewState extends State<AuthView> {
                                 name: 'Verify OTP to Proceed',
                               ),
                               const SizedBox(height: 24),
-                              widget.isPhoneVerifyFlow
+                              widget.isPhoneVerifyFlow || !widget.showBottomLine
                                   ? SizedBox()
                                   : SizedBox(
                                       width: 307,
