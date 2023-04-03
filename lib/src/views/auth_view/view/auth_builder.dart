@@ -51,6 +51,8 @@ class AuthBuilder extends StatelessWidget {
 
   final void Function(String message) onfailure;
 
+  final bool onlySupportIndianNo;
+
   AuthBuilder({
     super.key,
     this.googleScopes,
@@ -72,6 +74,7 @@ class AuthBuilder extends StatelessWidget {
     this.screen1Title,
     this.authToken,
     this.showBottomLine = true,
+    this.onlySupportIndianNo = true,
   }) {
     // registering dependencies
     Locator.i.registerLocators(
@@ -93,6 +96,7 @@ class AuthBuilder extends StatelessWidget {
         )
       ],
       child: AuthView(
+        onlySupportIndianNo: onlySupportIndianNo,
         authToken: authToken,
         showBottomLine: showBottomLine,
         screen1Description: screen1Description,
