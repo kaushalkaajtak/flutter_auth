@@ -198,10 +198,9 @@ class _AuthViewState extends State<AuthView> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              AbsorbPointer(
-                                absorbing: widget.onlySupportIndianNo,
-                                child: GestureDetector(
-                                  onTap: () {
+                              GestureDetector(
+                                onTap: () {
+                                  if (!widget.onlySupportIndianNo) {
                                     showCountryPicker(
                                       context: context,
                                       favorite: ['IN', 'US'],
@@ -213,104 +212,102 @@ class _AuthViewState extends State<AuthView> {
                                         setState(() {});
                                       },
                                     );
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        height: 45,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: AuthColors
-                                                  .textFieldBorderColor),
-                                          color: AuthColors.countryCodePicker,
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            bottomLeft: Radius.circular(10),
-                                          ),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              countryCode,
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
-                                                color: AuthColors.white,
-                                              ),
-                                            ),
-                                            const Icon(
-                                              Icons.keyboard_arrow_down,
-                                              size: 16,
-                                              color: AuthColors.white,
-                                            )
-                                          ],
+                                  }
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      height: 45,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AuthColors
+                                                .textFieldBorderColor),
+                                        color: AuthColors.countryCodePicker,
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          bottomLeft: Radius.circular(10),
                                         ),
                                       ),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: AuthColors
-                                                  .textFieldBorderColor),
-                                          borderRadius: const BorderRadius.only(
-                                            topRight: Radius.circular(10),
-                                            bottomRight: Radius.circular(10),
-                                          ),
-                                        ),
-                                        child: TextField(
-                                          keyboardType: TextInputType.phone,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
-                                          maxLength: 12,
-                                          decoration: const InputDecoration(
-                                            hintText: 'Mobile Number',
-                                            hintStyle: TextStyle(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            countryCode,
+                                            style: const TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w400,
-                                              color: Colors.grey,
-                                            ),
-                                            contentPadding: EdgeInsets.zero,
-                                            border: InputBorder.none,
-                                            constraints: BoxConstraints(
-                                              maxWidth: 197,
-                                              maxHeight: 45,
+                                              color: AuthColors.white,
                                             ),
                                           ),
-                                          controller: _phoneController,
-                                          buildCounter: (context,
-                                              {required currentLength,
-                                              required isFocused,
-                                              maxLength}) {
-                                            return SizedBox();
-                                          },
-                                          onChanged: (value) {
-                                            phoneNumber = _phoneController.text;
-                                            _mobileChangedListener(phoneNumber);
-                                          },
-                                          onTap: () {
-                                            if (Platform.isAndroid &&
-                                                !clickedOnce) {
-                                              if (_phoneController
-                                                  .text.isEmpty) {
-                                                OtpService.getPhoneNumberHint();
-                                              }
-                                              setState(() {
-                                                clickedOnce = true;
-                                              });
-                                            }
-                                          },
+                                          const Icon(
+                                            Icons.keyboard_arrow_down,
+                                            size: 16,
+                                            color: AuthColors.white,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AuthColors
+                                                .textFieldBorderColor),
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                      child: TextField(
+                                        keyboardType: TextInputType.phone,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
+                                        maxLength: 12,
+                                        decoration: const InputDecoration(
+                                          hintText: 'Mobile Number',
+                                          hintStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey,
+                                          ),
+                                          contentPadding: EdgeInsets.zero,
+                                          border: InputBorder.none,
+                                          constraints: BoxConstraints(
+                                            maxWidth: 197,
+                                            maxHeight: 45,
+                                          ),
+                                        ),
+                                        controller: _phoneController,
+                                        buildCounter: (context,
+                                            {required currentLength,
+                                            required isFocused,
+                                            maxLength}) {
+                                          return SizedBox();
+                                        },
+                                        onChanged: (value) {
+                                          phoneNumber = _phoneController.text;
+                                          _mobileChangedListener(phoneNumber);
+                                        },
+                                        onTap: () {
+                                          if (Platform.isAndroid &&
+                                              !clickedOnce) {
+                                            if (_phoneController.text.isEmpty) {
+                                              OtpService.getPhoneNumberHint();
+                                            }
+                                            setState(() {
+                                              clickedOnce = true;
+                                            });
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               if (_mobileError != null &&
