@@ -333,7 +333,7 @@ class _AuthViewState extends State<AuthView> {
                                         numberUpdate: widget.isPhoneVerifyFlow,
                                       );
                                 },
-                                name: 'Verify OTP to Proceed',
+                                name: 'Generate OTP to Proceed',
                               ),
                               const SizedBox(height: 24),
                               widget.isPhoneVerifyFlow || !widget.showBottomLine
