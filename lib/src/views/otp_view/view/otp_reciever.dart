@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
- 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -87,7 +86,7 @@ class _OtpReceiverState extends State<OtpReceiver> {
                   children: [
                     Center(
                         child: TitleWidget(
-                      title: 'Verify Otp',
+                      title: 'Verify OTP',
                       headerWidget: widget.headerWidget,
                       description:
                           'We’ve sent you a verification code to\n+91 ${widget.number}. Please enter the code to\nregister.',
