@@ -170,6 +170,7 @@ class _AuthViewState extends State<AuthView> {
                   MaterialPageRoute(
                     builder: (context) => OtpReceiverBuilder(
                       number: phoneNumber,
+                      countryCode: countryCode,
                       headerWidget: widget.headerWidget,
                       userModel: model,
                       onloginSuccess: widget.onloginSuccess,

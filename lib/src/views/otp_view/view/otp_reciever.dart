@@ -17,13 +17,15 @@ class OtpReceiver extends StatefulWidget {
   final UserModel userModel;
   final Widget? headerWidget;
   final String number;
+  final String countryCode;
   final void Function(UserModel userModel)? onloginSuccess;
   const OtpReceiver(
       {super.key,
       required this.userModel,
       this.onloginSuccess,
       this.headerWidget,
-      required this.number});
+      required this.number,
+      required this.countryCode});
 
   @override
   State<OtpReceiver> createState() => _OtpReceiverState();
@@ -89,7 +91,7 @@ class _OtpReceiverState extends State<OtpReceiver> {
                       title: 'Verify OTP',
                       headerWidget: widget.headerWidget,
                       description:
-                          'We’ve sent you a verification code to\n+91 ${widget.number}. Please enter the code to\nregister.',
+                          'We’ve sent you a verification code to\n${widget.countryCode} ${widget.number}. Please enter the code to\nregister.',
                     )),
                     Container(
                       width: size.width * .8,

@@ -1,4 +1,3 @@
- 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,18 +12,21 @@ class OtpReceiverBuilder extends StatelessWidget {
   final String number;
   final void Function(UserModel userModel)? onloginSuccess;
   final UserModel userModel;
+  final String countryCode;
   const OtpReceiverBuilder(
       {super.key,
       required this.userModel,
       this.onloginSuccess,
       this.headerWidget,
-      required this.number});
+      required this.number,
+      required this.countryCode});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => Locator.i.locate<OtpReceiverCubit>(),
       child: OtpReceiver(
+        countryCode: countryCode,
         userModel: userModel,
         onloginSuccess: onloginSuccess,
         headerWidget: headerWidget,
