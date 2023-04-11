@@ -70,7 +70,7 @@ class LoginRequest {
     data['deviceId'] = deviceId;
     data['cleverTapId'] = cleverTapId;
     data['email'] = email;
-    data['countyCode'] = countryCode;
+    data['countryCode'] = countryCode;
     data['e164Key'] = e164Key;
     data['numberUpdate'] = numberUpdate;
     return data;
