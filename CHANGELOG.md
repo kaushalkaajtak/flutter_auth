@@ -60,7 +60,6 @@
 
 - Updated flutter channel.
 
-
 ## 1.3.7
 
 - Added equatable for remaining events.
@@ -78,3 +77,9 @@
 
 - Added parameters for phone login [e164Key,countryCode]
 - Modified dev api for example app.
+
+## 1.6.1
+
+- Fixed countyCode issue.
+- Disabled mutiple user taps on generate OTP button.
+- Added paramter [onlySupportIndianNo,isPhoneVerifyFlow,showBottomLine,screen1Title,screen1Description] for enabling/disabling international support, disabling line seperator when using screen as otp verification system, disabling the line seperator in general, customized title and description texts respectively.

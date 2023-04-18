@@ -10,12 +10,21 @@ import 'auth_view.dart';
 class AuthBuilder extends StatelessWidget {
   /// base url for server api
   final String baseUrl;
+
+  /// add customized description for login screen.
   final String? screen1Description;
+
+  /// add customized title for login screen.
   final String? screen1Title;
+
+  /// used to disable the seperation between otp and social login
   final bool showBottomLine;
 
   /// Auth token - If want to verify phoneNumber only.
   final String? authToken;
+
+  /// used to disable the seperation between otp and social 
+  /// login if user has used this screen as phone verification flow.
   final bool isPhoneVerifyFlow;
 
   /// defaults to email scope only
@@ -49,8 +58,10 @@ class AuthBuilder extends StatelessWidget {
   /// returns a user model if login has been succesfull
   final void Function(UserModel userModel) onloginSuccess;
 
+  /// failure callback with string message.
   final void Function(String message) onfailure;
 
+  /// enable/disable support for international numbers.
   final bool onlySupportIndianNo;
 
   AuthBuilder({

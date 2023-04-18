@@ -87,6 +87,7 @@ class _AuthViewState extends State<AuthView> {
   String phoneNumber = '';
   bool isvalidated = false;
   bool clickedOnce = false;
+  bool isButtonClicked = false;
 
   final _phoneController = TextEditingController();
   @override
@@ -244,11 +245,12 @@ class _AuthViewState extends State<AuthView> {
                                               color: AuthColors.white,
                                             ),
                                           ),
-                                          const Icon(
-                                            Icons.keyboard_arrow_down,
-                                            size: 16,
-                                            color: AuthColors.white,
-                                          )
+                                          if (!widget.onlySupportIndianNo)
+                                            const Icon(
+                                              Icons.keyboard_arrow_down,
+                                              size: 16,
+                                              color: AuthColors.white,
+                                            )
                                         ],
                                       ),
                                     ),
@@ -289,7 +291,7 @@ class _AuthViewState extends State<AuthView> {
                                             {required currentLength,
                                             required isFocused,
                                             maxLength}) {
-                                          return SizedBox();
+                                          return const SizedBox();
                                         },
                                         onChanged: (value) {
                                           phoneNumber = _phoneController.text;
@@ -325,6 +327,10 @@ class _AuthViewState extends State<AuthView> {
                               RegularButton(
                                 isActive: isvalidated,
                                 ontap: () {
+                                  if (isButtonClicked) {
+                                    return;
+                                  }
+                                  isButtonClicked = true;
                                   context.read<OtpCubit>().requestOtp(
                                         /// Auth token - If want to verify phoneNumber only.
                                         authToken: widget.authToken,
@@ -338,7 +344,7 @@ class _AuthViewState extends State<AuthView> {
                               ),
                               const SizedBox(height: 24),
                               widget.isPhoneVerifyFlow || !widget.showBottomLine
-                                  ? SizedBox()
+                                  ? const SizedBox()
                                   : SizedBox(
                                       width: 307,
                                       child: Row(

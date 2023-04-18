@@ -1,6 +1,6 @@
 name: flutter_auth
 description: Flutter plugin for seemless auth module integration.
-version: 1.6.0
+version: 1.6.1
 homepage: https://github.com/kaushalkaajtak/flutter_auth
 
 environment:

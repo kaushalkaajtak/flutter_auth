@@ -53,3 +53,10 @@ In your dart code you can call `AuthBuilder()` class to use the plugin. Paramete
 - `skipText`: Provide a text for skip button.
 - `onSkip`: Callback for skip button.
 - `isSkipVisible`: Bool to enable skip button.
+- `onlySupportIndianNo` : Bool for enabling/disabling international support.
+- `isPhoneVerifyFlow`: disable the line sepertion between otp and social login when used this screen as otp verify flow.
+- `showBottomLine`: Whether to enable/disable the line sepertion between otp and social login.
+- `screen1Description`:Customized description for login page.
+- `screen1Title`: Customized title for login page.
+
+
