@@ -83,3 +83,8 @@
 - Fixed countyCode issue.
 - Disabled mutiple user taps on generate OTP button.
 - Added paramter [onlySupportIndianNo,isPhoneVerifyFlow,showBottomLine,screen1Title,screen1Description] for enabling/disabling international support, disabling line seperator when using screen as otp verification system, disabling the line seperator in general, customized title and description texts respectively.
+
+
+## 1.6.2
+
+- added text length to 10 for phone number.

@@ -271,7 +271,7 @@ class _AuthViewState extends State<AuthView> {
                                         inputFormatters: [
                                           FilteringTextInputFormatter.digitsOnly
                                         ],
-                                        maxLength: 12,
+                                        maxLength: 10,
                                         decoration: const InputDecoration(
                                           hintText: 'Mobile Number',
                                           hintStyle: TextStyle(
