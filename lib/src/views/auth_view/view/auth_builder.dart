@@ -23,7 +23,7 @@ class AuthBuilder extends StatelessWidget {
   /// Auth token - If want to verify phoneNumber only.
   final String? authToken;
 
-  /// used to disable the seperation between otp and social 
+  /// used to disable the seperation between otp and social
   /// login if user has used this screen as phone verification flow.
   final bool isPhoneVerifyFlow;
 
@@ -64,6 +64,8 @@ class AuthBuilder extends StatelessWidget {
   /// enable/disable support for international numbers.
   final bool onlySupportIndianNo;
 
+  final bool enableWhatsapp;
+
   AuthBuilder({
     super.key,
     this.googleScopes,
@@ -86,6 +88,7 @@ class AuthBuilder extends StatelessWidget {
     this.authToken,
     this.showBottomLine = true,
     this.onlySupportIndianNo = true,
+    required this.enableWhatsapp,
   }) {
     // registering dependencies
     Locator.i.registerLocators(
@@ -107,6 +110,7 @@ class AuthBuilder extends StatelessWidget {
         )
       ],
       child: AuthView(
+        enableWhatsApp: enableWhatsapp,
         onlySupportIndianNo: onlySupportIndianNo,
         authToken: authToken,
         showBottomLine: showBottomLine,

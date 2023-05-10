@@ -1,4 +1,3 @@
- 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../models/login_response.dart';
@@ -52,6 +51,25 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> facebookLogin() async {
+    // setting up null if user tries to login again
+    // then the sucess might get calls even if current request has failed.
+    userModel = null;
+    emit(AuthLoading());
+    try {
+      userModel = await _service.facebookAuth();
+      if (userModel != null) {
+        emit(Authenticated(userModel!));
+      } else {
+        emit(AuthCanceled('Cancelled login with Facebook'));
+      }
+    } on AuthException catch (e) {
+      emit(AuthError(message: e.message));
+    } catch (e) {
+      emit(AuthError(message: e.toString()));
+    }
+  }
+
+  Future<void> whatsAppLogin() async {
     // setting up null if user tries to login again
     // then the sucess might get calls even if current request has failed.
     userModel = null;

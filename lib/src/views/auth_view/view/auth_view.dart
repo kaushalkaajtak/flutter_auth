@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth/src/consts/auth_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../consts/strings.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../models/login_response.dart';
@@ -55,6 +56,8 @@ class AuthView extends StatefulWidget {
 
   final void Function(String message) onfailure;
 
+  final bool enableWhatsApp;
+
   const AuthView({
     super.key,
     required this.onloginSuccess,
@@ -74,6 +77,7 @@ class AuthView extends StatefulWidget {
     this.authToken,
     required this.showBottomLine,
     required this.onlySupportIndianNo,
+    required this.enableWhatsApp,
   });
 
   @override
@@ -378,6 +382,38 @@ class _AuthViewState extends State<AuthView> {
                               const SizedBox(height: 12),
                             ],
                           ),
+                        AuthButton(
+                          iconSize: 28,
+                          margin: const EdgeInsets.only(top: 5),
+                          isVisible: widget.enableWhatsApp,
+                          image: Assets.icons.whatsapp,
+                          buttonText: Strings.whatsApp,
+                          ontap: () async {
+                            await context.read<OtpCubit>().requestWhatsAppLink(
+                                  /// Auth token - If want to verify phoneNumber only.
+                                  authToken: widget.authToken,
+                                );
+
+                            // saving user model in a variable for better null check syntax
+                            var userModel = context.read<OtpCubit>().userModel;
+
+                            if (userModel?.url != null) {
+                              if (await canLaunchUrl(
+                                  Uri.tryParse(userModel?.url ?? "") ??
+                                      Uri())) {
+                                launchUrl(Uri.parse(userModel?.url ?? ""));
+                              }
+                            }
+
+                            // var successCallback = widget.onloginSuccess;
+
+                            // // checks if success call is provided and given that user has successfull
+                            // // logged in it invoks the callback with user model.
+                            // if (userModel != null) {
+                            //   successCallback(userModel);
+                            // }
+                          },
+                        ),
                         AuthButton(
                           margin: const EdgeInsets.only(top: 5),
                           isVisible: widget.enableFacebookAuth,

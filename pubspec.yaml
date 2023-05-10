@@ -8,6 +8,7 @@ environment:
   flutter: ">=2.5.0"
 
 dependencies:
+  url_launcher: ^6.1.11
   flutter:
     sdk: flutter
 

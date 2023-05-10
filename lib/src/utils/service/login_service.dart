@@ -97,6 +97,55 @@ class LoginService {
     }
   }
 
+  Future<UserModel?> whatsAppAuth() async {
+    UserModel? userModel;
+    try {
+      final LoginResult result = await FacebookAuth.i.login(
+        loginBehavior: LoginBehavior.webOnly,
+      );
+
+      // login successfull
+      switch (result.status) {
+        case LoginStatus.success:
+          Map<String, dynamic> userData = await FacebookAuth.i.getUserData(
+            fields: _fbScopes ?? 'name,email,picture.width(200)',
+          );
+          // server authentication
+          var response = await _authRepo.serverAuthentication(
+            request: LoginRequest(
+              email: userData['email'] ?? '',
+              loginType: LoginRequest.facebookType,
+              fullname: userData['name'] ?? '',
+              facebookId: userData['id'] ?? '',
+              profileImage: userData['picture']?['data']?['url'] ?? '',
+              deviceId: await LoginRequest.deviceIdentifier(),
+            ),
+          );
+
+          if (response.status ?? false) {
+            userModel = response.result;
+          }
+
+          break;
+
+        case LoginStatus.cancelled:
+          break;
+
+        case LoginStatus.failed:
+          break;
+
+        default:
+          break;
+      }
+
+      return userModel;
+    } on AuthException catch (e) {
+      throw AuthException(message: e.message);
+    } catch (e) {
+      throw AuthException(message: e.toString());
+    }
+  }
+
   Future<UserModel?> appleAuth() async {
     // login initiated
     try {
@@ -146,7 +195,8 @@ class LoginService {
       required String countyCode,
       required String e164Key,
       required bool numberUpdate,
-      String? authToken}) async {
+      String? authToken,
+      String? logintype}) async {
     // otp requesting
 
     try {
@@ -157,7 +207,7 @@ class LoginService {
             e164Key: e164Key,
             numberUpdate: numberUpdate,
             deviceId: await LoginRequest.deviceIdentifier(),
-            loginType: LoginRequest.otpType,
+            loginType: logintype ?? LoginRequest.otpType,
           ),
           token: authToken);
 

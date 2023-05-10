@@ -1,4 +1,3 @@
- 
 import 'package:flutter/material.dart';
 
 import '../../gen/assets.gen.dart';
@@ -8,6 +7,7 @@ class AuthButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback ontap;
   final bool isVisible;
+  final double? iconSize;
   final EdgeInsetsGeometry? margin;
 
   const AuthButton(
@@ -16,7 +16,8 @@ class AuthButton extends StatelessWidget {
       required this.buttonText,
       required this.ontap,
       required this.isVisible,
-      this.margin});
+      this.margin,
+      this.iconSize});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class AuthButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(width: 15),
-                image.image(height: 20, width: 20),
+                image.image(height: iconSize ?? 20, width: iconSize ?? 20),
                 const SizedBox(width: 12),
                 Text(
                   buttonText,

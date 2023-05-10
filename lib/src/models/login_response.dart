@@ -49,7 +49,7 @@ class UserModel {
   bool? isNew;
   String? countryCode;
   String? e164Key;
-
+  String? url;
   UserModel(
       {this.sId,
       this.firstname,
@@ -76,7 +76,8 @@ class UserModel {
       this.token,
       this.isNew,
       this.countryCode,
-      this.e164Key});
+      this.e164Key,
+      this.url});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -105,6 +106,7 @@ class UserModel {
     isNew = json['isNew'];
     countryCode = json['countryCode'];
     e164Key = json['e164Key'];
+    url = json['url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -135,7 +137,7 @@ class UserModel {
     data['isNew'] = isNew;
     data['countryCode'] = countryCode;
     data['e164Key'] = e164Key;
-
+    data["url"] = url;
     return data;
   }
 }

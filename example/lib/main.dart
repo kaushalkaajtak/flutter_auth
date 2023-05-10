@@ -37,6 +37,10 @@ class _MyAppState extends State<MyApp> {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return AuthBuilder(
+                      enableWhatsapp: true,
+                      enableAppleAuth: false,
+                      enableFacebookAuth: true,
+                      enableGoogleAuth: false,
                       isSkipVisible: true,
                       onSkip: () {},
                       skipText: 'Skip',

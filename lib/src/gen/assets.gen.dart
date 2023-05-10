@@ -35,9 +35,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/phone.png
   AssetGenImage get phone => const AssetGenImage('assets/icons/phone.png');
 
+  /// File path: assets/icons/whatsapp.png
+  AssetGenImage get whatsapp =>
+      const AssetGenImage('assets/icons/whatsapp.png');
+
   /// List of all assets
   List<AssetGenImage> get values =>
-      [apple, correct, errorImage, facebook, google, otp, phone];
+      [apple, correct, errorImage, facebook, google, otp, phone, whatsapp];
 }
 
 class Assets {
@@ -104,7 +108,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package = 'flutter_auth',
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 

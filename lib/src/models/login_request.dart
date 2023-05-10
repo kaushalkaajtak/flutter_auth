@@ -88,6 +88,8 @@ class LoginRequest {
   /// login type of otp auth
   static const String otpType = "1";
 
+  static const String whatsApp = "6";
+
   ///
   /// Method to give device info which is used by backend to identify
   /// device.
