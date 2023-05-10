@@ -401,7 +401,8 @@ class _AuthViewState extends State<AuthView> {
                               if (await canLaunchUrl(
                                   Uri.tryParse(userModel?.url ?? "") ??
                                       Uri())) {
-                                launchUrl(Uri.parse(userModel?.url ?? ""));
+                                launchUrl(Uri.parse(userModel?.url ?? ""),
+                                    mode: LaunchMode.externalApplication);
                               }
                             }
 
