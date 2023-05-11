@@ -25,6 +25,15 @@ class OtpSent extends OtpState {
   List<Object?> get props => [dateTime];
 }
 
+class LinkSent extends OtpState {
+  final DateTime dateTime;
+
+  LinkSent(this.dateTime);
+
+  @override
+  List<Object?> get props => [dateTime];
+}
+
 class OtpError extends OtpState {
   final String message;
   final DateTime dateTime;

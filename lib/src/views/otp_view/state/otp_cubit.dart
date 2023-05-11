@@ -62,7 +62,7 @@ class OtpCubit extends Cubit<OtpState> {
       if (userModel == null) {
         emit(OtpError('Some error occured.', DateTime.now()));
       } else {
-        emit(OtpSent(DateTime.now()));
+        emit(LinkSent(DateTime.now()));
       }
     } on AuthException catch (e) {
       emit(OtpError(e.message, DateTime.now()));
