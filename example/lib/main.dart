@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
                       enableWhatsapp: true,
                       enableAppleAuth: false,
                       enableFacebookAuth: true,
-                      enableGoogleAuth: false,
+                      enableGoogleAuth: true,
                       isSkipVisible: true,
                       onSkip: () {},
                       skipText: 'Skip',

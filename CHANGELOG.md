@@ -88,3 +88,7 @@
 ## 1.6.2
 
 - added text length to 10 for phone number.
+
+
+## 1.7.0
+- Updgraded flutter version
