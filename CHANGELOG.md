@@ -99,3 +99,7 @@
 
 ## 1.8.1
 - Patch for title and description text style.
+
+## 1.8.2
+- Added additional headers params.
+- Updated readme.

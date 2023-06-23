@@ -58,5 +58,8 @@ In your dart code you can call `AuthBuilder()` class to use the plugin. Paramete
 - `showBottomLine`: Whether to enable/disable the line sepertion between otp and social login.
 - `screen1Description`:Customized description for login page.
 - `screen1Title`: Customized title for login page.
+- `titleTextStyle`:TextStyle for title.
+- `descriptionTextStyle`: TextStyle for description.
+- `headers`: Base option headers.
 
 

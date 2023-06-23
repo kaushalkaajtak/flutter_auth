@@ -1,4 +1,3 @@
- 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -27,7 +26,10 @@ class Locator {
 
   /// registering the objects lazyly.
   void registerLocators(
-      {List<String>? googleScopes, String? fbScopes, required String baseUrl}) {
+      {List<String>? googleScopes,
+      String? fbScopes,
+      required String baseUrl,
+      Map<String, dynamic>? headers}) {
     if (!_getIt.isRegistered<AuthCubit>()) {
       _getIt.registerFactory<AuthCubit>(
         () => AuthCubit(_getIt.get<LoginService>()),
@@ -44,7 +46,7 @@ class Locator {
         () => AuthRepo(_getIt.get<Dio>()),
       );
       _getIt.registerLazySingleton<Dio>(
-        () => Dio(BaseOptions(baseUrl: baseUrl)),
+        () => Dio(BaseOptions(baseUrl: baseUrl, headers: headers)),
       );
     }
   }

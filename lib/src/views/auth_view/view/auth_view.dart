@@ -352,6 +352,7 @@ class _AuthViewState extends State<AuthView> {
                                         numberUpdate: widget.isPhoneVerifyFlow,
                                       );
                                 },
+                                
                                 name: 'Generate OTP to Proceed',
                               ),
                               const SizedBox(height: 24),

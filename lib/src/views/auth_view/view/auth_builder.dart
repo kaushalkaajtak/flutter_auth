@@ -27,6 +27,7 @@ class AuthBuilder extends StatelessWidget {
   /// used to disable the seperation between otp and social
   /// login if user has used this screen as phone verification flow.
   final bool isPhoneVerifyFlow;
+  final Map<String, dynamic>? headers;
 
   /// defaults to email scope only
   final List<String>? googleScopes;
@@ -82,6 +83,7 @@ class AuthBuilder extends StatelessWidget {
     this.enableAppleAuth = true,
     this.enableGoogleAuth = true,
     this.enableFacebookAuth = true,
+    this.headers,
     required this.onfailure,
     required this.baseUrl,
     required this.isSkipVisible,
@@ -103,6 +105,7 @@ class AuthBuilder extends StatelessWidget {
       googleScopes: googleScopes,
       fbScopes: fbScopes,
       baseUrl: baseUrl,
+      headers: headers,
     );
   }
 
