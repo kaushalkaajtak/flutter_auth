@@ -109,3 +109,8 @@
 ## 1.8.3
 
 - Added new parms for api end points.
+
+
+## 1.8.4
+
+- Patch work (added idtoken)

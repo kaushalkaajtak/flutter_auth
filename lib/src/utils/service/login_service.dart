@@ -29,7 +29,7 @@ class LoginService {
       var googleSignInAccount = await _googleSignIn.signIn();
       if (googleSignInAccount == null) return null;
 
-      var token = (await googleSignInAccount.authentication).accessToken;
+      var token = (await googleSignInAccount.authentication).idToken;
       // server authentication
 
       var response = await _authRepo.serverAuthentication(
@@ -164,12 +164,12 @@ class LoginService {
           AppleIDAuthorizationScopes.fullName,
         ],
       );
-      log(credential.authorizationCode, name: 'Appletoken');
+      log(credential.identityToken ?? '', name: 'Appletoken');
 
       // server authentication
       var response = await _authRepo.serverAuthentication(
           request: LoginRequest(
-        idToken: credential.authorizationCode,
+        idToken: credential.identityToken ?? '',
         email: credential.email ?? '',
         fullname: credential.givenName,
         appleId: credential.userIdentifier.toString(),
