@@ -43,7 +43,7 @@ class LoginService {
           deviceId: await LoginRequest.deviceIdentifier(),
         ),
       );
-      if (response.status ?? false) {
+      if (response.result != null) {
         return response.result;
       } else {
         throw AuthException(message: response.message ?? "Unknown error");
@@ -81,7 +81,7 @@ class LoginService {
             ),
           );
 
-          if (response.status ?? false) {
+          if (response.result != null) {
             userModel = response.result;
           }
 
@@ -131,7 +131,7 @@ class LoginService {
             ),
           );
 
-          if (response.status ?? false) {
+          if (response.result != null) {
             userModel = response.result;
           }
 
@@ -177,7 +177,7 @@ class LoginService {
         loginType: LoginRequest.appleType,
       ));
 
-      if (response.status ?? false) {
+      if (response.result != null) {
         return response.result;
       } else {
         throw AuthException(message: response.message ?? "Unknown error");
@@ -224,7 +224,7 @@ class LoginService {
           ),
           token: authToken);
 
-      if (response.status ?? false) {
+      if (response.result != null) {
         return response.result;
       } else {
         throw AuthException(message: response.message ?? "Unknown error");
@@ -240,7 +240,7 @@ class LoginService {
     try {
       var response = await _authRepo.verifyOtp(request);
 
-      if (response.status ?? false) {
+      if (response.result != null) {
         return response.result!;
       } else {
         throw AuthException(message: response.message ?? "Unknown error");
