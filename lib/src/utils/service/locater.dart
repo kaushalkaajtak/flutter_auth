@@ -25,11 +25,15 @@ class Locator {
   }
 
   /// registering the objects lazyly.
-  void registerLocators(
-      {List<String>? googleScopes,
-      String? fbScopes,
-      required String baseUrl,
-      Map<String, dynamic>? headers}) {
+  void registerLocators({
+    List<String>? googleScopes,
+    String? fbScopes,
+    required String baseUrl,
+    Map<String, dynamic>? headers,
+    String? loginApi,
+    String? otpVerifyApi,
+    String? otpResendApi,
+  }) {
     if (!_getIt.isRegistered<AuthCubit>()) {
       _getIt.registerFactory<AuthCubit>(
         () => AuthCubit(_getIt.get<LoginService>()),
@@ -43,7 +47,10 @@ class Locator {
       _getIt.registerLazySingleton<LoginService>(
           () => LoginService(_getIt.get<AuthRepo>(), googleScopes, fbScopes));
       _getIt.registerLazySingleton(
-        () => AuthRepo(_getIt.get<Dio>()),
+        () => AuthRepo(_getIt.get<Dio>(),
+            loginApi: loginApi,
+            otpResendApi: otpResendApi,
+            otpVerifyApi: otpVerifyApi),
       );
       _getIt.registerLazySingleton<Dio>(
         () => Dio(BaseOptions(baseUrl: baseUrl, headers: headers)),

@@ -43,7 +43,7 @@ class AuthButton extends StatelessWidget {
                 Text(
                   buttonText,
                   style: const TextStyle(
-                    color: Colors.black54,
+                    color: Colors.grey,
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
                   ),

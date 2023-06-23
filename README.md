@@ -61,5 +61,6 @@ In your dart code you can call `AuthBuilder()` class to use the plugin. Paramete
 - `titleTextStyle`:TextStyle for title.
 - `descriptionTextStyle`: TextStyle for description.
 - `headers`: Base option headers.
-
-
+- `loginApi`: Login end point.
+- `otpVerifyApi`: Otp verify end point.
+- `otpResendApi`: Otp resend end point.

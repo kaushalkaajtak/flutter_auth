@@ -72,6 +72,10 @@ class AuthBuilder extends StatelessWidget {
 
   final TextStyle? descriptionTextStyle;
 
+  final String? loginApi;
+  final String? otpVerifyApi;
+  final String? otpResendApi;
+
   AuthBuilder({
     super.key,
     this.googleScopes,
@@ -98,6 +102,9 @@ class AuthBuilder extends StatelessWidget {
     required this.enableWhatsapp,
     this.titleTextStyle,
     this.descriptionTextStyle,
+    this.loginApi,
+    this.otpVerifyApi,
+    this.otpResendApi,
   }) {
     Firebase.initializeApp();
     // registering dependencies
@@ -106,6 +113,9 @@ class AuthBuilder extends StatelessWidget {
       fbScopes: fbScopes,
       baseUrl: baseUrl,
       headers: headers,
+      loginApi: loginApi,
+      otpResendApi: otpResendApi,
+      otpVerifyApi: otpVerifyApi,
     );
   }
 

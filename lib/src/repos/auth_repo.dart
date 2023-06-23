@@ -8,14 +8,17 @@ import '../utils/auth_exception/auth_exception.dart';
 
 class AuthRepo {
   final Dio _dio;
-  AuthRepo(this._dio);
+  final String? loginApi;
+  final String? otpVerifyApi;
+  final String? otpResendApi;
+  AuthRepo(this._dio, {this.loginApi, this.otpVerifyApi, this.otpResendApi});
 //Chlja noobde
 
   Future<LoginResponse> serverAuthentication(
       {required LoginRequest request, String? token}) async {
     try {
       var response = await _dio.post(
-        ApiConsts.LOGIN,
+        loginApi ?? ApiConsts.LOGIN,
         data: request.toJson(),
         options: token != null
             ? Options(
@@ -35,7 +38,7 @@ class AuthRepo {
   Future<LoginResponse> verifyOtp(OtpRequest request) async {
     try {
       var response = await _dio.put(
-        ApiConsts.OTP_VERIFY,
+        otpVerifyApi ?? ApiConsts.OTP_VERIFY,
         data: request.toJson(),
       );
       var responseMap = response.data as Map<String, dynamic>;
@@ -51,7 +54,7 @@ class AuthRepo {
       ResendOtpRequest resendOtpRequest) async {
     try {
       var response = await _dio.put(
-        ApiConsts.OTP_RESEND,
+        otpResendApi ?? ApiConsts.OTP_RESEND,
         data: resendOtpRequest.toJson(),
       );
       var responseMap = response.data as Map<String, dynamic>;

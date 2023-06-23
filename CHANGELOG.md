@@ -84,22 +84,28 @@
 - Disabled mutiple user taps on generate OTP button.
 - Added paramter [onlySupportIndianNo,isPhoneVerifyFlow,showBottomLine,screen1Title,screen1Description] for enabling/disabling international support, disabling line seperator when using screen as otp verification system, disabling the line seperator in general, customized title and description texts respectively.
 
-
 ## 1.6.2
 
 - added text length to 10 for phone number.
 
-
 ## 1.7.0
+
 - Updgraded flutter version
 
 ## 1.8.0
+
 - Added textstyle params for title and description.
 - Added id token system for authentication for apple and google login.
 
 ## 1.8.1
+
 - Patch for title and description text style.
 
 ## 1.8.2
+
 - Added additional headers params.
 - Updated readme.
+
+## 1.8.3
+
+- Added new parms for api end points.
