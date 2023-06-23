@@ -32,6 +32,8 @@ class LoginRequest {
   final String? fullname;
   final String? profileImage;
 
+  final String idToken;
+
   // late initializations
   /// specifies device platform (android/ios)
   late String deviceType;
@@ -53,6 +55,7 @@ class LoginRequest {
     this.countryCode = '',
     this.e164Key = '',
     this.numberUpdate = false,
+    required this.idToken,
   }) {
     deviceType = Platform.isAndroid ? Strings.android : Strings.ios;
   }
@@ -73,7 +76,8 @@ class LoginRequest {
     data['countyCode'] = countryCode;
     data['e164Key'] = e164Key;
     data['numberUpdate'] = numberUpdate;
-    data["source"] = "app";
+    data["source"] = Platform.isAndroid ? 'android' : 'ios_app';
+    data["idToken"] = idToken;
     return data;
   }
 

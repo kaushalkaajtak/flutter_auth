@@ -1,10 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter_auth/flutter_auth.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyDqu_pNdmJ2ZkVLmS5hXXthnkfy_GIa990",
+          appId: 'com.aajtak.auth_example',
+          messagingSenderId: '',
+          projectId: 'auth-example-56358'));
   runApp(const MaterialApp(home: MyApp()));
 }
 
@@ -44,7 +53,7 @@ class _MyAppState extends State<MyApp> {
                       isSkipVisible: true,
                       onSkip: () {},
                       skipText: 'Skip',
-                      baseUrl: 'https://api-crimetak-dev.mobiletak.com/',
+                      baseUrl: '',
                       onfailure: (message) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(message)));

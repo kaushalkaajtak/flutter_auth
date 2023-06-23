@@ -56,6 +56,10 @@ class AuthView extends StatefulWidget {
 
   final void Function(String message) onfailure;
 
+  final TextStyle? titleTextStyle;
+
+  final TextStyle? descriptionTextStyle;
+
   final bool enableWhatsApp;
 
   const AuthView({
@@ -78,6 +82,8 @@ class AuthView extends StatefulWidget {
     required this.showBottomLine,
     required this.onlySupportIndianNo,
     required this.enableWhatsApp,
+    this.titleTextStyle,
+    this.descriptionTextStyle,
   });
 
   @override

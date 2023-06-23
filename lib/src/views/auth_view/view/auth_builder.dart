@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -66,6 +67,10 @@ class AuthBuilder extends StatelessWidget {
 
   final bool enableWhatsapp;
 
+  final TextStyle? titleTextStyle;
+
+  final TextStyle? descriptionTextStyle;
+
   AuthBuilder({
     super.key,
     this.googleScopes,
@@ -89,7 +94,10 @@ class AuthBuilder extends StatelessWidget {
     this.showBottomLine = true,
     this.onlySupportIndianNo = true,
     required this.enableWhatsapp,
+    this.titleTextStyle,
+    this.descriptionTextStyle,
   }) {
+    Firebase.initializeApp();
     // registering dependencies
     Locator.i.registerLocators(
       googleScopes: googleScopes,
@@ -124,6 +132,8 @@ class AuthBuilder extends StatelessWidget {
         enableAppleAuth: enableAppleAuth,
         enableGoogleAuth: enableGoogleAuth,
         enableFacebookAuth: enableFacebookAuth,
+        titleTextStyle: titleTextStyle,
+        descriptionTextStyle: descriptionTextStyle,
         onfailure: onfailure,
         isSkipVisible: isSkipVisible,
         skipText: skipText,

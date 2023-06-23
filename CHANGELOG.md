@@ -92,3 +92,7 @@
 
 ## 1.7.0
 - Updgraded flutter version
+
+## 1.8.0
+- Added textstyle params for title and description.
+- Added id token system for authentication for apple and google login.

@@ -4,12 +4,16 @@ class TitleWidget extends StatelessWidget {
   final String description;
   final String title;
   final Widget? headerWidget;
+  final TextStyle? titleStyle;
+  final TextStyle? descriptionStyle;
 
   const TitleWidget(
       {super.key,
       required this.headerWidget,
       required this.description,
-      required this.title});
+      required this.title,
+      this.titleStyle,
+      this.descriptionStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +31,12 @@ class TitleWidget extends StatelessWidget {
         const SizedBox(height: 50),
         Text(
           title,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 24,
-            color: Colors.black,
-          ),
+          style: titleStyle ??
+              const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 24,
+                color: Colors.black,
+              ),
         ),
         const SizedBox(height: 12),
         Padding(
@@ -39,11 +44,12 @@ class TitleWidget extends StatelessWidget {
           child: Text(
             description,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-              color: Colors.black54,
-            ),
+            style: descriptionStyle ??
+                const TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                  color: Colors.black54,
+                ),
           ),
         ),
         const SizedBox(height: 50),

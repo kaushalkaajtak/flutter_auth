@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -25,9 +28,13 @@ class LoginService {
     try {
       var googleSignInAccount = await _googleSignIn.signIn();
       if (googleSignInAccount == null) return null;
+
+      var token = (await googleSignInAccount.authentication).accessToken;
       // server authentication
+
       var response = await _authRepo.serverAuthentication(
         request: LoginRequest(
+          idToken: token ?? '',
           email: googleSignInAccount.email,
           googleId: googleSignInAccount.id,
           loginType: LoginRequest.googleType,
@@ -64,6 +71,7 @@ class LoginService {
           // server authentication
           var response = await _authRepo.serverAuthentication(
             request: LoginRequest(
+              idToken: result.accessToken?.token ?? '',
               email: userData['email'] ?? '',
               loginType: LoginRequest.facebookType,
               fullname: userData['name'] ?? '',
@@ -113,6 +121,7 @@ class LoginService {
           // server authentication
           var response = await _authRepo.serverAuthentication(
             request: LoginRequest(
+              idToken: result.accessToken?.token ?? '',
               email: userData['email'] ?? '',
               loginType: LoginRequest.facebookType,
               fullname: userData['name'] ?? '',
@@ -155,9 +164,12 @@ class LoginService {
           AppleIDAuthorizationScopes.fullName,
         ],
       );
+      log(credential.authorizationCode, name: 'Appletoken');
+
       // server authentication
       var response = await _authRepo.serverAuthentication(
           request: LoginRequest(
+        idToken: credential.authorizationCode,
         email: credential.email ?? '',
         fullname: credential.givenName,
         appleId: credential.userIdentifier.toString(),
@@ -202,6 +214,7 @@ class LoginService {
     try {
       var response = await _authRepo.serverAuthentication(
           request: LoginRequest(
+            idToken: '',
             phoneNumber: phoneNumber,
             countryCode: countyCode,
             e164Key: e164Key,
