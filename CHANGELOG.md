@@ -110,7 +110,10 @@
 
 - Added new parms for api end points.
 
-
 ## 1.8.4
 
 - Patch work (added idtoken)
+
+## 1.8.5
+
+- Patch work (added json)

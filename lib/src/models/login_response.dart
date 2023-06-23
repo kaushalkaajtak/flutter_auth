@@ -80,7 +80,7 @@ class UserModel {
       this.url});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+    sId = json['_id'] ?? json['id'] ?? '';
     firstname = json['firstname'];
     lastname = json['lastname'];
     fullname = json['fullname'];
@@ -102,7 +102,7 @@ class UserModel {
     deviceType = json['deviceType'];
     deviceId = json['deviceId'];
     deviceToken = json['deviceToken'];
-    token = json['token'];
+    token = json['token'] ?? json['authToken'] ?? '';
     isNew = json['isNew'];
     countryCode = json['countryCode'];
     e164Key = json['e164Key'];
