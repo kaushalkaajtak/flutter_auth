@@ -203,6 +203,8 @@ class _AuthViewState extends State<AuthView> {
                       description: widget.screen1Description ??
                           'Join us to access all the best\nfeatures that enhance your essential daily\n crime news',
                       title: widget.screen1Title ?? 'Login or Register',
+                      descriptionStyle: widget.descriptionTextStyle,
+                      titleStyle: widget.titleTextStyle,
                     ),
                     Column(
                       children: [

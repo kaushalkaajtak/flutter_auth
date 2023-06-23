@@ -96,3 +96,6 @@
 ## 1.8.0
 - Added textstyle params for title and description.
 - Added id token system for authentication for apple and google login.
+
+## 1.8.1
+- Patch for title and description text style.
