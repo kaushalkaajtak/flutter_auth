@@ -117,3 +117,7 @@
 ## 1.8.5
 
 - Patch work (added json)
+
+## 1.9.0
+
+- Upgraded flutter version.
