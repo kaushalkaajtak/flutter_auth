@@ -121,3 +121,7 @@
 ## 1.9.0
 
 - Upgraded flutter version.
+
+## 1.9.1
+
+- Fixed compilation issues for xcode version 15.
