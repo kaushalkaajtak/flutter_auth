@@ -27,7 +27,7 @@ dependencies:
 
   # for authenticatio package
   flutter_facebook_auth: ^5.0.7
-  google_sign_in: ^5.4.2
+  google_sign_in: ^6.1.6
   plugin_platform_interface: ^2.0.2
   sign_in_with_apple: ^4.3.0
 

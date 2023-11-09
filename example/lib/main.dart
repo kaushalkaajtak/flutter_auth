@@ -8,12 +8,7 @@ import 'package:flutter_auth/flutter_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      options: FirebaseOptions(
-          apiKey: "AIzaSyDqu_pNdmJ2ZkVLmS5hXXthnkfy_GIa990",
-          appId: 'com.aajtak.auth_example',
-          messagingSenderId: '',
-          projectId: 'auth-example-56358'));
+  await Firebase.initializeApp();
   runApp(const MaterialApp(home: MyApp()));
 }
 
